@@ -30,9 +30,7 @@ def video_selector(videos: list) -> str:
     if not videos:
         videos = ["There's no video .mp4 or .mkv in this directory"]
     question = [
-        inquirer.List(
-            "video", message="Select the video you want to process", choices=videos
-        )
+        inquirer.List("video", message="Select the video to process", choices=videos)
     ]
 
     answer = inquirer.prompt(question)
@@ -53,9 +51,9 @@ def select_output_resolution():
     question = [
         inquirer.List(
             "resolution",
-            message="Select if you want to use CPU or GPU",
+            message="Select the output resolution",
             choices=choices,
-            default="1920x1080",
+            default="default",
         )
     ]
 
@@ -68,7 +66,9 @@ def select_cpu_or_gpu():
     choices = ["CPU", "Nvidia GPU"]
     question = [
         inquirer.List(
-            "device", message="Select if you want to use CPU or GPU", choices=choices
+            "device",
+            message="Select the device to encode with : CPU or GPU",
+            choices=choices,
         )
     ]
 
@@ -80,9 +80,7 @@ def select_cpu_or_gpu():
 def select_video_codec():
     choices = ["H264", "H265"]
     question = [
-        inquirer.List(
-            "codec", message="Select the video codec you want", choices=choices
-        )
+        inquirer.List("codec", message="Select the video codec", choices=choices)
     ]
 
     answer = inquirer.prompt(question)
@@ -101,7 +99,7 @@ def select_quality():
     question = [
         inquirer.List(
             "quality",
-            message="Select the video quality you want",
+            message="Select the video quality",
             choices=[e.value for e in Quality],
             default="High",
         )
